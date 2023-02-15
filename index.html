@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meme generator</title>
+    <link rel="stylesheet" href="css/main.css" />
+  </head>
+  <body onload="onInit()">
+
+
+    <div class="main-container">
+      <header class="main-header">
+        <!-- <img src="LOGO/LOGO.png" alt="" srcset=""> -->
+        <button class="btn-gallery" onclick="onGallery()">Gallery</button>
+        <button class="btn-about" onclick="onAbout()">About</button>
+      </header>
+
+
+      <div class="container">
+        <div class="canvas-container">
+            <div class="upper-line"></div>
+            <canvas id="my-canvas" height="350" width="350" style="border: 2px solid black;"> </canvas>
+        </div>
+
+
+        <section class="editor-container">
+          <input oninput="drawText(this.value)" class="editor-input" type="text" name="text" placeholder="Enter text here"/>
+          <button class="editor-btn" onclick="onReplaceLine()"><img class="icon" src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+          <button class="editor-btn" onclick="onAddLIne()"><img class="icon" src="ICONS/add.png"></button>
+          <button class="editor-btn" onclick="onRemoveLine()"><img class="icon" src="ICONS/trash.png"></button>
+          
+          <button class="editor-btn" onclick="onFontIncrease()"><img class="icon" src="ICONS/increase font - icon.png"></button>
+          <button class="editor-btn" onclick="onFontDecrease()"><img class="icon" src="ICONS/decrease font - icon.png"></button>
+          <button class="editor-btn" onclick="onTextAlignLeft()"><img class="icon" src="ICONS/align-to-left.png"></button>
+          <button class="editor-btn" onclick="onTextAlignCenter()"><img class="icon" src="ICONS/center-text-alignment.png"></button>
+          <button class="editor-btn" onclick="onTextAlignRight()"><img class="icon" src="ICONS/align-to-right.png"></button>
+
+          <button class="editor-btn fill-txt" type="color" onchange="onColorChange()"><img class="icon" src="ICONS/paint-board-and-brush.png"></button>
+          <button class="editor-btn stroke-txt" type="color" onchange="onColorChange()"><img class="icon" src="ICONS/paint-board-and-brush.png"></button>
+
+        </section>
+      </div>
+
+      <section class="gallery">
+<!-- <img src="img-square/1.jpg" alt="" srcset=""> -->
+
+      </section>
+    </div>
+
+    <script src="js/util.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/meme-service.js"></script>
+    <script src="js/meme-controller.js"></script>
+  </body>
+</html>
