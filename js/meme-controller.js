@@ -64,6 +64,8 @@ function drawImgFromLocal() {
 // function onGallery() {
 
 
+
+
   let imgGallery = document.querySelector('.gallery')
   if (imgGallery.style.display === 'none') {
       document.querySelector('.container').style.display = 'none'
