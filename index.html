@@ -26,7 +26,7 @@
 
 
         <section class="editor-container">
-          <input oninput="drawText(this.value)" class="editor-input" type="text" name="text" placeholder="Enter text here"/>
+          <input oninput="onDrawText(this.value)" class="editor-input" type="text" name="text" placeholder="Enter text here"/>
           <button class="editor-btn" onclick="onReplaceLine()"><img class="icon" src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
           <button class="editor-btn" onclick="onAddLIne()"><img class="icon" src="ICONS/add.png"></button>
           <button class="editor-btn" onclick="onRemoveLine()"><img class="icon" src="ICONS/trash.png"></button>
@@ -43,10 +43,7 @@
         </section>
       </div>
 
-      <section class="gallery">
-<!-- <img src="img-square/1.jpg" alt="" srcset=""> -->
-
-      </section>
+      <section class="gallery" style="display: none;"></section>
     </div>
 
     <script src="js/util.js"></script>

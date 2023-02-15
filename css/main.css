@@ -28,14 +28,12 @@
     justify-content: space-around;
     align-items: center;
     margin-block-start: 30px;
-    /* grid-template-columns: minmax(20px,1fr) minmax(auto,750px) minmax(20px,1fr); */
+   
 }
 
 
 canvas {
-    /* display: inline-block; */
     background: darkgray;
-    /* grid-column: 2; */
 }
 
 .gallery {
@@ -44,8 +42,8 @@ canvas {
     justify-content: space-between;
 }
 .img-gallery {
-    width: 60px;
-    height: 60px;
+    width: 125px;
+    height: 125px;
 }
 
 .editor-container {

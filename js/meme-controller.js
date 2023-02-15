@@ -7,72 +7,77 @@ gElCanvas = document.querySelector('#my-canvas')
 gCtx = gElCanvas.getContext('2d')
 
 function onInit() {
+  renderCanvas()
+}
 
+function renderCanvas() {
+  let meme = getMeme()
+  clearCanvas()
   drawImgFromLocal()
+  drawText(meme)
 }
 
-// function renderTextOnCanvas(value) {
-//   let elTxt = document.querySelector('.upper-line')
-//   elTxt.innerText = value
-// }
-
-function drawText(text, x = 175, y = 50) {
-    gCtx.lineWidth = 2
-    gCtx.strokeStyle = 'brown'
+function drawText(meme) {
+  for (let i = 0; i < meme.lines.length; i++) {
+    gCtx.strokeStyle = meme.lines[i].color
     gCtx.fillStyle = 'black'
-    gCtx.font = '40px Arial'
-    gCtx.textAlign = 'center'
+    gCtx.font = `${meme.lines[i].size}px Arial`
+    gCtx.textAlign = meme.lines[i].align
     gCtx.textBaseline = 'middle'
-
-    gCtx.fillText(text, x, y) // Draws (fills) a given text at the given (x, y) position.
-    gCtx.strokeText(text, x, y) // Draws (strokes) a given text at the given (x, y) position.
+    setTimeout(() => {
+      gCtx.fillText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
+      gCtx.strokeText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
+    }, 100)
+  }
 }
 
+function onDrawText(text) {
+  updateText(text)
+  renderCanvas()
+}
 
 function renderImagesForDisplay() {
-    // debugger
-    let elGallery = document.querySelector('.gallery')
-    let images = getImages()
+  let strHtml = ``
+  let elGallery = document.querySelector('.gallery')
+  let images = getImages()
 
-    var strHtml = images.map(image => {
-        `<div class = "img-gallery" onclick="onImageClick('${image.id}')"><img src='${image.ur}'></div>`
-    })
+  strHtml = images.map(
+    (image) =>
+      `<div onclick="onSelectImage('${image.id}')"><img class="img-gallery" src='${image.url}'></div>`
+  )
 
-    elGallery.innerHTML = strHtml.join(``)
-                        
+  elGallery.innerHTML = strHtml.join(``)
 }
 
-//  function renderMeme() {
-//
-
-//      drawImgFromLocal()
-//     }
-
-function onSelectImg() {
-  selectImg()
+function onSelectImage(imgId) {
+  setSelectedImg(+imgId)
+  onGallery()
+  renderCanvas()
 }
 
 function drawImgFromLocal() {
   const img = new Image()
-  img.src = 'img-square/1.jpg'
+  const src = getSelectedImgSrc()
+  img.src = src
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height) //img,x,y,xEnd,yEnd
-
   }
 }
 
-// function onGallery() {
-
-
-
-
+function onGallery() {
   let imgGallery = document.querySelector('.gallery')
   if (imgGallery.style.display === 'none') {
-      document.querySelector('.container').style.display = 'none'
+    document.querySelector('.container').style.display = 'none'
+    document.querySelector('.btn-gallery').innerText = 'Editor'
     imgGallery.style.display = 'flex'
+    renderImagesForDisplay()
   } else {
     imgGallery.style.display = 'none'
     document.querySelector('.container').style.display = 'flex'
+    document.querySelector('.btn-gallery').innerText = 'Gallery'
   }
-//   renderImagesForDisplay()
-// }
+}
+
+function clearCanvas() {
+  gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+}
