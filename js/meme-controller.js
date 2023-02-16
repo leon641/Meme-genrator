@@ -15,20 +15,32 @@ function renderCanvas() {
   clearCanvas()
   drawImgFromLocal()
   drawText(meme)
+  
+}
+
+function onAddLIne() {
+    addLine()
+    renderCanvas()
+    
+}
+
+function onReplaceLine(){
+    replaceLine()
 }
 
 function drawText(meme) {
-  for (let i = 0; i < meme.lines.length; i++) {
-    gCtx.strokeStyle = meme.lines[i].color
-    gCtx.fillStyle = 'black'
-    gCtx.font = `${meme.lines[i].size}px Arial`
-    gCtx.textAlign = meme.lines[i].align
+    gCtx.strokeStyle = meme.color
+    gCtx.fillStyle = 'green'
+    gCtx.font = `${meme.size}px Arial`
+    gCtx.textAlign = meme.align
     gCtx.textBaseline = 'middle'
+
     setTimeout(() => {
-      gCtx.fillText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
-      gCtx.strokeText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
-    }, 100)
-  }
+      gCtx.fillText(meme.txt, meme.posX, meme.posY)
+      gCtx.strokeText(meme.txt, meme.posX, meme.posY)
+      
+    },0)
+    saveText()
 }
 
 function onDrawText(text) {
@@ -81,3 +93,25 @@ function onGallery() {
 function clearCanvas() {
   gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
+
+function onFontIncrease(){
+    fontIncrease()
+    renderCanvas()
+}
+
+function onFontDecrease(){
+    fontDecrease()
+    renderCanvas()
+}
+
+function onTextAlignLeft(){}
+
+function onTextAlignCenter(){}
+
+function onTextAlignRight(){}
+
+function saveText() {
+    gCtx.save() 
+    gCtx.restore()
+}
+

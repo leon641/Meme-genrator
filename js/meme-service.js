@@ -27,27 +27,41 @@ var gMeme = {
   selectedLineIdx: 0,
   lines: [
     {
-      txt: 'Enter text',
-      size: 40,
+      txt: '',
+      size: 30,
       align: 'left',
       color: 'yellow',
-      posX: 150,
+      posX: 50,
       posY: 50,      
-    },{
-        txt: 'Enter klghkg',
-        size: 40,
-        align: 'center',
-        color: 'red',
-        posX: 150,
-        posY: 300,
-      },
+    },
   ],
 }
 
+function addLine() {
+    gMeme.lines.push( {
+        txt: '',
+        size: 40,
+        align: 'center',
+        color: 'red',
+        posX: 50,
+        posY: 300,
+      },)
+}
 
+function replaceLine() {
+    if(gMeme.selectedLineIdx === 0){
+        gMeme.selectedLineIdx = 1
+
+    }  else if(gMeme.selectedLineIdx === 1) {
+        gMeme.selectedLineIdx = 0
+    }
+    
+}
 
 function getMeme() {
-  return gMeme
+let memeIdx = gMeme.selectedLineIdx
+console.log(memeIdx);
+return gMeme.lines[memeIdx]
 }
 
 function getImages() {
@@ -59,7 +73,8 @@ function getImgById(imgId) {
 }
 
 function updateText(text) {
-  gMeme.lines[0].txt = text
+    let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].txt = text
   return gMeme
 }
 
@@ -73,8 +88,24 @@ function setSelectedImg(imgIdx) {
 
 function getSelectedImgSrc() {
     let img = gImages.find(image => gMeme.selectedImgId === image.id)
+    
     return img.url
 
 }
 
-function writeText(txt, id) {}
+function fontIncrease() {
+    
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].size += 3
+    if(gMeme.lines[0].size === 45) return 
+    
+}
+
+function fontDecrease() {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].size -= 3
+    if(gMeme.lines[0].size === 18) return 
+    
+}
+
+
