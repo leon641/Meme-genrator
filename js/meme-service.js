@@ -27,9 +27,9 @@ var gMeme = {
   selectedLineIdx: 0,
   lines: [
     {
-      txt: '',
-      size: 30,
-      align: 'left',
+      txt: 'Enter text',
+      size: 25,
+      align: 'middle',
       color: 'yellow',
       posX: 130,
       posY: 50,      
@@ -40,8 +40,8 @@ var gMeme = {
 function addLine() {
     gMeme.lines.push( {
         txt: '',
-        size: 40,
-        align: 'left',
+        size: 25,
+        align: 'middle',
         color: 'red',
         posX: 130,
         posY: 300,

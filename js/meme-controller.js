@@ -13,11 +13,8 @@ function onInit() {
 function renderCanvas() {
   let meme = getMeme()
   let lineIdx = meme.selectedLineIdx
-  //   clearCanvas()
-  drawImgFromLocal()
 
-  drawText(meme)
-  drawRect(meme.lines[lineIdx].posX - 70, meme.lines[lineIdx].posY - 25)
+  drawImgFromLocalThenText(meme)
 }
 
 function onAddLIne() {
@@ -30,26 +27,40 @@ function onReplaceLine() {
   replaceLine()
 }
 
-function drawText(meme) {
+function drawTexts(meme) {
   for (let i = 0; i < meme.lines.length; i++) {
-    setTimeout(() => {
-      gCtx.strokeStyle = meme.lines[i].color
-      gCtx.fillStyle = 'green'
-      gCtx.font = `${meme.lines[i].size}px Arial`
-      gCtx.textAlign = meme.lines[i].align
-      gCtx.textBaseline = 'middle'
-      gCtx.fillText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
-      gCtx.strokeText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
-    }, 0)
+    if (meme.selectedLineIdx === i) {
+      let { txt, posX, posY, size, align, color } = meme.lines[i]
+      drawTextInRect(posX - 70, posY - 25, size, txt, align, color)
+    } else {
+      let { txt, posX, posY, size, color, align } = meme.lines[i]
+      drawText(txt, posX, posY, size, color, align)
+    }
   }
 }
 
-function drawRect(x, y) {
-  setTimeout(() => {
-    gCtx.strokeStyle = 'yellow'
-    gCtx.strokeRect(x, y, 250, 40)
-    gCtx.fillStyle = 'orange'
-  }, 500)
+function drawText(text, x, y, size, color, align) {
+  gCtx.fillStyle = color
+  gCtx.font = `${size}px Arial`
+  gCtx.textAlign = align
+  gCtx.textBaseline = 'middle'
+  gCtx.strokeStyle = 'yellow'
+  gCtx.fillText(text, x + 45, y + 22)
+}
+
+function drawTextInRect(x, y, size, text, align) {
+  let lineHeight = size * 1.286
+  let textWidth =
+    gCtx.measureText(text).width < 225 ? 225 : gCtx.measureText(text).width
+
+  gCtx.fillStyle = 'green'
+  gCtx.font = `${size}px Arial`
+  gCtx.textAlign = align
+  gCtx.textBaseline = 'middle'
+  gCtx.strokeStyle = 'yellow'
+  gCtx.strokeRect(x, y, textWidth, lineHeight)
+  gCtx.fillStyle = 'orange'
+  gCtx.fillText(text, x + 45, y + 22)
 }
 
 function onDrawText(text) {
@@ -66,7 +77,7 @@ function renderImagesForDisplay() {
     (image) =>
       `<div onclick="onSelectImage('${image.id}')"><img class="img-gallery" src='${image.url}'></div>`
   )
-  debugger
+
   elGallery.innerHTML = strHtml.join(``)
 }
 
@@ -76,12 +87,13 @@ function onSelectImage(imgId) {
   renderCanvas()
 }
 
-function drawImgFromLocal() {
+function drawImgFromLocalThenText(meme) {
   const img = new Image()
   const src = getSelectedImgSrc()
   img.src = src
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height) //img,x,y,xEnd,yEnd
+    drawTexts(meme)
   }
 }
 
@@ -130,8 +142,8 @@ function onTextAlignCenter() {
 }
 
 function downloadCanvas(elLink) {
-    const data = gElCanvas.toDataURL() 
+  const data = gElCanvas.toDataURL()
 
-    elLink.href = data
-    elLink.download = 'my-img.jpg'
+  elLink.href = data
+  elLink.download = 'my-img.jpg'
 }
