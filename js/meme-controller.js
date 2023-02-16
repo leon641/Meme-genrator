@@ -12,35 +12,44 @@ function onInit() {
 
 function renderCanvas() {
   let meme = getMeme()
-  clearCanvas()
+  let lineIdx = meme.selectedLineIdx
+  //   clearCanvas()
   drawImgFromLocal()
+
   drawText(meme)
-  
+  drawRect(meme.lines[lineIdx].posX - 70, meme.lines[lineIdx].posY - 25)
 }
 
 function onAddLIne() {
-    addLine()
-    renderCanvas()
-    
+  addLine()
+  replaceLine()
+  renderCanvas()
 }
 
-function onReplaceLine(){
-    replaceLine()
+function onReplaceLine() {
+  replaceLine()
 }
 
 function drawText(meme) {
-    gCtx.strokeStyle = meme.color
-    gCtx.fillStyle = 'green'
-    gCtx.font = `${meme.size}px Arial`
-    gCtx.textAlign = meme.align
-    gCtx.textBaseline = 'middle'
-
+  for (let i = 0; i < meme.lines.length; i++) {
     setTimeout(() => {
-      gCtx.fillText(meme.txt, meme.posX, meme.posY)
-      gCtx.strokeText(meme.txt, meme.posX, meme.posY)
-      
-    },0)
-    saveText()
+      gCtx.strokeStyle = meme.lines[i].color
+      gCtx.fillStyle = 'green'
+      gCtx.font = `${meme.lines[i].size}px Arial`
+      gCtx.textAlign = meme.lines[i].align
+      gCtx.textBaseline = 'middle'
+      gCtx.fillText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
+      gCtx.strokeText(meme.lines[i].txt, meme.lines[i].posX, meme.lines[i].posY)
+    }, 0)
+  }
+}
+
+function drawRect(x, y) {
+  setTimeout(() => {
+    gCtx.strokeStyle = 'yellow'
+    gCtx.strokeRect(x, y, 250, 40)
+    gCtx.fillStyle = 'orange'
+  }, 500)
 }
 
 function onDrawText(text) {
@@ -57,7 +66,7 @@ function renderImagesForDisplay() {
     (image) =>
       `<div onclick="onSelectImage('${image.id}')"><img class="img-gallery" src='${image.url}'></div>`
   )
-
+  debugger
   elGallery.innerHTML = strHtml.join(``)
 }
 
@@ -80,8 +89,9 @@ function onGallery() {
   let imgGallery = document.querySelector('.gallery')
   if (imgGallery.style.display === 'none') {
     document.querySelector('.container').style.display = 'none'
-    document.querySelector('.btn-gallery').innerText = 'Editor'
     imgGallery.style.display = 'flex'
+
+    document.querySelector('.btn-gallery').innerText = 'Editor'
     renderImagesForDisplay()
   } else {
     imgGallery.style.display = 'none'
@@ -94,24 +104,34 @@ function clearCanvas() {
   gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
 }
 
-function onFontIncrease(){
-    fontIncrease()
-    renderCanvas()
+function onFontIncrease() {
+  fontIncrease()
+  renderCanvas()
 }
 
-function onFontDecrease(){
-    fontDecrease()
-    renderCanvas()
+function onFontDecrease() {
+  fontDecrease()
+  renderCanvas()
 }
 
-function onTextAlignLeft(){}
-
-function onTextAlignCenter(){}
-
-function onTextAlignRight(){}
-
-function saveText() {
-    gCtx.save() 
-    gCtx.restore()
+function onTextAlignLeft() {
+  alignLeft()
+  renderCanvas()
 }
 
+function onTextAlignRight() {
+  alignRight()
+  renderCanvas()
+}
+
+function onTextAlignCenter() {
+  alignCenter()
+  renderCanvas()
+}
+
+function downloadCanvas(elLink) {
+    const data = gElCanvas.toDataURL() 
+
+    elLink.href = data
+    elLink.download = 'my-img.jpg'
+}

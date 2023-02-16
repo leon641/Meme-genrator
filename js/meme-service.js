@@ -31,7 +31,7 @@ var gMeme = {
       size: 30,
       align: 'left',
       color: 'yellow',
-      posX: 50,
+      posX: 130,
       posY: 50,      
     },
   ],
@@ -41,11 +41,11 @@ function addLine() {
     gMeme.lines.push( {
         txt: '',
         size: 40,
-        align: 'center',
+        align: 'left',
         color: 'red',
-        posX: 50,
+        posX: 130,
         posY: 300,
-      },)
+      })
 }
 
 function replaceLine() {
@@ -59,9 +59,7 @@ function replaceLine() {
 }
 
 function getMeme() {
-let memeIdx = gMeme.selectedLineIdx
-console.log(memeIdx);
-return gMeme.lines[memeIdx]
+return gMeme
 }
 
 function getImages() {
@@ -106,6 +104,26 @@ function fontDecrease() {
     gMeme.lines[idx].size -= 3
     if(gMeme.lines[0].size === 18) return 
     
+}
+
+function alignLeft() {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].align = 'left'
+    gMeme.lines[idx].posX = 20
+    gMeme.lines[idx].posY = 50
+}
+function alignRight() {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].align = 'right'
+    gMeme.lines[idx].posX = 310
+    gMeme.lines[idx].posY = 50
+    
+}
+function alignCenter() {
+    let idx = gMeme.selectedLineIdx
+    gMeme.lines[idx].align = 'center'
+    gMeme.lines[idx].posX = 160
+    gMeme.lines[idx].posY = 50
 }
 
 

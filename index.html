@@ -12,15 +12,17 @@
 
     <div class="main-container">
       <header class="main-header">
-        <!-- <img src="LOGO/LOGO.png" alt="" srcset=""> -->
-        <button class="btn-gallery" onclick="onGallery()">Gallery</button>
-        <button class="btn-about" onclick="onAbout()">About</button>
+        <img class="logo" src="LOGO/LOGO.png">
+        
+        <button class="header-btn btn-gallery" onclick="onGallery()">Gallery</button>
+        <button class="header-btn" onclick="onAbout()">About</button>
+        <button class="header-btn"><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
       </header>
 
 
       <div class="container">
-        <div class="canvas-container">>
-            <canvas id="my-canvas" height="350" width="350" style="border: 2px solid black;"> </canvas>
+        <div class="canvas-container">
+            <canvas id="my-canvas" height="350" width="350" style="border: 2px solid black;"></canvas>
         </div>
 
 
