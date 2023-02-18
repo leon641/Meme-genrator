@@ -3,6 +3,7 @@
 let gElCanvas
 let gCtx
 
+
 gElCanvas = document.querySelector('#my-canvas')
 gCtx = gElCanvas.getContext('2d')
 
@@ -146,4 +147,49 @@ function downloadCanvas(elLink) {
 
   elLink.href = data
   elLink.download = 'my-img.jpg'
+}
+
+function onImgInput(ev) {
+    loadImageFromInput(ev, renderImg)
+}
+
+function renderImg(img) {
+    // Draw the img on the canvas
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+}
+
+function onUploadImg() {
+    const imgDataUrl = gElCanvas.toDataURL('image/jpeg') // Gets the canvas content as an image format
+
+    // A function to be called if request succeeds
+    function onSuccess(uploadedImgUrl) {
+        // Encode the instance of certain characters in the url
+        const encodedUploadedImgUrl = encodeURIComponent(uploadedImgUrl)
+        console.log(encodedUploadedImgUrl)
+        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodedUploadedImgUrl}&t=${encodedUploadedImgUrl}`)
+    }
+    // Send the image to the server
+    doUploadImg(imgDataUrl, onSuccess)
+}
+
+function addIcons (){
+    // elContainer.innerHTML = gIcons
+    
+    let strHtml = ``
+    let elContainer = document.querySelector('.icon-container')
+    let icons = getIcons()
+    // debugger
+  
+    strHtml = icons.map((icon) => `<td onclick="onSelectIcon()">${icon}</td>`)
+  
+    elContainer.innerHTML = strHtml.join(``)
+}
+addIcons()
+
+function onNavClicked() {
+    console.log("nav clicked");
+let elContainer =  document.querySelector('.main-header')
+elContainer.style="over-flow:inherit;"
+
+//second clicked swich to over-flow : hidden;
 }
