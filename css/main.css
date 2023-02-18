@@ -2,7 +2,6 @@
     box-sizing: border-box;
 }
 
-
 .main-container {
     margin:  0 auto;
     width: 70%;
@@ -25,30 +24,26 @@
 }
 
 .logo {
-    /* display: inline; */
     width: 225px;
     height: 50px;
 }
-
 
 .container {
     display: flex;
     justify-content: space-around;
     align-items: center;
     margin-block-start: 30px;
-   
 }
-
 
 canvas {
     background: darkgray;
 }
 
 .gallery {
-    /* display: flex; */
     flex-flow: wrap;
     justify-content: space-evenly;
 }
+
 .img-gallery {
     width: 125px;
     height: 125px;
@@ -60,11 +55,10 @@ canvas {
 }
 
 .editor-container {
-    background: rgb(242, 112, 147);
+    background: #A44200;
     border-radius: 10px;
     width: 350px;
     height: 350px;
-    
 }
 
 .btn-container {
@@ -80,13 +74,9 @@ canvas {
     margin: 2% 11%;
 }
 
-
 .container {
     position: relative;
 }
-
-
-
 
 .editor-btn {
     width: 60px;
@@ -136,14 +126,26 @@ canvas {
 }
 
 .icon-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto;
     margin-top: 10px;
     border-radius: 8px;
     width: 185px;
-    height: 25px;
+    height: 40px;
     text-align: center;
     background-color: grey;
 }
+
+.icon {
+    font-size: 26px;
+}
+
+.navbar-img {
+    display: none;
+}
+
 @media screen and (max-width: 1060px) {
     .main-header {
         position: relative;
@@ -162,13 +164,16 @@ canvas {
         left: 65%;
         margin-top: 10px;
     }
+
     .container {
         display: inline;
     }
+
     .main-container {
         width: 370px;
         height: auto;
     }
+
     .canvas-container {
         margin:  5px auto;
         margin-left: 2%;
@@ -186,7 +191,12 @@ canvas {
         z-index: 2;
         top: 1px !important;
         cursor: pointer;
-        /* display: block; */
+       
+    }
+
+    .navbar-img {
+        display: block;
+    
     }
 
 }
@@ -194,5 +204,21 @@ canvas {
 .navbar-icon {
     position: relative;
     top: 100px;
+    right: 5px;
+
+}
+
+.navbar-img {
+    
+    border-radius: 10px;
+}
+
+.icon-container:hover {
+background-color: rgb(146, 80, 208);
+}
+
+.icon:hover {
+    cursor: pointer;
+    font-size: 29px;
 }
 

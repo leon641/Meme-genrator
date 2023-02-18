@@ -1,5 +1,5 @@
 'use strick'
-let gIcons = ['😛','😂','😍','😁']
+let gIcons = ['😛', '😂', '😍', '😁']
 var gKeyWordCountMap = { funny: 12, cat: 16, baby: 2 }
 var gImages = [
   { id: 1, url: 'img-square/1.jpg', keywords: ['celebrity', 'tramp'] },
@@ -32,47 +32,33 @@ var gMeme = {
       align: 'middle',
       color: 'yellow',
       posX: 130,
-      posY: 50,      
+      posY: 50,
+      icon: '',
     },
   ],
 }
 
 function addLine() {
-    gMeme.lines.push( {
-        txt: '',
-        size: 25,
-        align: 'middle',
-        color: 'red',
-        posX: 130,
-        posY: 300,
-      })
+  gMeme.lines.push({
+    txt: '',
+    size: 25,
+    align: 'middle',
+    color: 'red',
+    posX: 130,
+    posY: 300,
+    icon: '',
+  })
 }
 
 function replaceLine() {
-    if(gMeme.selectedLineIdx === 0){
-        gMeme.selectedLineIdx = 1
-
-    }  else if(gMeme.selectedLineIdx === 1) {
-        gMeme.selectedLineIdx = 0
-    }
-    
+  if (gMeme.selectedLineIdx === 0) {
+    gMeme.selectedLineIdx = 1
+  } else if (gMeme.selectedLineIdx === 1) {
+    gMeme.selectedLineIdx = 0
+  }
 }
 
 function getMeme() {
-return gMeme
-}
-
-function getImages() {
-  return gImages
-}
-
-function getImgById(imgId) {
-    return gImages.find(image => imgId === image.id)
-}
-
-function updateText(text) {
-    let idx = gMeme.selectedLineIdx
-  gMeme.lines[idx].txt = text
   return gMeme
 }
 
@@ -80,97 +66,120 @@ function getImages() {
   return gImages
 }
 
+function getImgById(imgId) {
+  return gImages.find((image) => imgId === image.id)
+}
+
+function updateText(text) {
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].txt = text
+  return gMeme
+}
+
+function updateMeme(icon) {
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].icon = icon
+}
+
+function changeColor(color) {
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].color = color
+}
+
+function getImages() {
+  return gImages
+}
+
 function setSelectedImg(imgIdx) {
-    gMeme.selectedImgId = imgIdx
+  gMeme.selectedImgId = imgIdx
 }
 
 function getSelectedImgSrc() {
-    let img = gImages.find(image => gMeme.selectedImgId === image.id)
-    
-    return img.url
+  let img = gImages.find((image) => gMeme.selectedImgId === image.id)
 
+  return img.url
 }
 
 function fontIncrease() {
-    
-    let idx = gMeme.selectedLineIdx
-    gMeme.lines[idx].size += 3
-    if(gMeme.lines[0].size === 45) return 
-    
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].size += 3
+  if (gMeme.lines[0].size === 45) return
 }
 
 function fontDecrease() {
-    let idx = gMeme.selectedLineIdx
-    gMeme.lines[idx].size -= 3
-    if(gMeme.lines[0].size === 18) return 
-    
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].size -= 3
+  if (gMeme.lines[0].size === 18) return
 }
 
 function alignLeft() {
-    let idx = gMeme.selectedLineIdx
-    gMeme.lines[idx].align = 'left'
-    gMeme.lines[idx].posX = 20
-    gMeme.lines[idx].posY = 50
-}
-function alignRight() {
-    let idx = gMeme.selectedLineIdx
-    gMeme.lines[idx].align = 'right'
-    gMeme.lines[idx].posX = 310
-    gMeme.lines[idx].posY = 50
-    
-}
-function alignCenter() {
-    let idx = gMeme.selectedLineIdx
-    gMeme.lines[idx].align = 'center'
-    gMeme.lines[idx].posX = 160
-    gMeme.lines[idx].posY = 50
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].align = 'left'
+  gMeme.lines[idx].posX = 20
+  gMeme.lines[idx].posY = 50
 }
 
-// CallBack func will run on success load of the img
+function alignRight() {
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].align = 'right'
+  gMeme.lines[idx].posX = 310
+  gMeme.lines[idx].posY = 50
+}
+
+function alignCenter() {
+  let idx = gMeme.selectedLineIdx
+  gMeme.lines[idx].align = 'center'
+  gMeme.lines[idx].posX = 160
+  gMeme.lines[idx].posY = 50
+}
+
 function loadImageFromInput(ev, onImageReady) {
-    const reader = new FileReader()
-    // After we read the file
-    reader.onload = function (event) {
-        let img = new Image() // Create a new html img element
-        img.src = event.target.result // Set the img src to the img file we read
-        // Run the callBack func, To render the img on the canvas
-        img.onload = onImageReady.bind(null, img)
-        // Can also do it this way:
-        // img.onload = () => onImageReady(img)
-    }
-    reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
+  const reader = new FileReader()
+  // After we read the file
+  reader.onload = function (event) {
+    let img = new Image() // Create a new html img element
+    img.src = event.target.result // Set the img src to the img file we read
+    // Run the callBack func, To render the img on the canvas
+    img.onload = onImageReady.bind(null, img)
+    // Can also do it this way:
+    // img.onload = () => onImageReady(img)
+  }
+  reader.readAsDataURL(ev.target.files[0]) // Read the file we picked
 }
 
 function doUploadImg(imgDataUrl, onSuccess) {
-    // Pack the image for delivery
-    const formData = new FormData()
-    formData.append('img', imgDataUrl)
+  // Pack the image for delivery
+  const formData = new FormData()
+  formData.append('img', imgDataUrl)
 
-    // Send a post req with the image to the server
-    const XHR = new XMLHttpRequest()
-    XHR.onreadystatechange = () => {
-        // If the request is not done, we have no business here yet, so return
-        if (XHR.readyState !== XMLHttpRequest.DONE) return
-        // if the response is not ok, show an error
-        if (XHR.status !== 200) return console.error('Error uploading image')
-        const { responseText: url } = XHR
-        // Same as
-        // const url = XHR.responseText
+  // Send a post req with the image to the server
+  const XHR = new XMLHttpRequest()
+  XHR.onreadystatechange = () => {
+    // If the request is not done, we have no business here yet, so return
+    if (XHR.readyState !== XMLHttpRequest.DONE) return
+    // if the response is not ok, show an error
+    if (XHR.status !== 200) return console.error('Error uploading image')
+    const { responseText: url } = XHR
+    // Same as
+    // const url = XHR.responseText
 
-        // If the response is ok, call the onSuccess callback function, 
-        // that will create the link to facebook using the url we got
-        console.log('Got back live url:', url)
-        onSuccess(url)
-    }
-    XHR.onerror = (req, ev) => {
-        console.error('Error connecting to server with request:', req, '\nGot response data:', ev)
-    }
-    XHR.open('POST', '//ca-upload.com/here/upload.php')
-    XHR.send(formData)
+    // If the response is ok, call the onSuccess callback function,
+    // that will create the link to facebook using the url we got
+    console.log('Got back live url:', url)
+    onSuccess(url)
+  }
+  XHR.onerror = (req, ev) => {
+    console.error(
+      'Error connecting to server with request:',
+      req,
+      '\nGot response data:',
+      ev
+    )
+  }
+  XHR.open('POST', '//ca-upload.com/here/upload.php')
+  XHR.send(formData)
 }
 
-function getIcons () {
-    return gIcons
+function getIcons() {
+  return gIcons
 }
-
-

@@ -13,13 +13,15 @@
     <div class="main-container">
       <header class="main-header">
           <img class="logo" src="LOGO/LOGO.png">
-          <div class="navbar-icon" onclick="onNavClicked()"><img src="img/nav bar icon.png"></div>
+          <div class="navbar-icon" onclick="onNavClicked()"><img class="navbar-img" src="img/nav bar icon.png"></div>
 
         
-        <button class="header-btn btn-gallery" onclick="onGallery()">Gallery</button>
-        <button class="header-btn" onclick="onAbout()">About</button>
-        <button class="header-btn"><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
-        <button class="facebook header-btn" onclick="onUploadImg()">Facebook Share</button>
+            <button class="header-btn btn-gallery" onclick="onGallery()">Gallery</button>
+            <button class="header-btn" onclick="onAbout()">About</button>
+            <button class="header-btn"><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
+            <button class="facebook header-btn" onclick="onUploadImg()">Facebook Share</button>
+
+     
         
 
         
@@ -45,7 +47,7 @@
               <button class="editor-btn" onclick="onTextAlignCenter()"><img class="icon" src="ICONS/center-text-alignment.png"></button>
               <button class="editor-btn" onclick="onTextAlignRight()"><img class="icon" src="ICONS/align-to-right.png"></button>
               
-              <button class="editor-btn fill-txt" type="color" onchange="onColorChange()"><img class="icon" src="ICONS/paint-board-and-brush.png"></button>
+              <input class="editor-btn fill-txt" type="color" onchange="onColorChange(this.value)"></>
               <!-- <button class="editor-btn stroke-txt" type="color" onchange="onColorChange()"><img class="icon" src="ICONS/paint-board-and-brush.png"></button> -->
               <input class="uploud" type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
             </section>

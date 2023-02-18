@@ -9,12 +9,11 @@ gCtx = gElCanvas.getContext('2d')
 
 function onInit() {
   renderCanvas()
+  addIcons()
 }
 
 function renderCanvas() {
   let meme = getMeme()
-  let lineIdx = meme.selectedLineIdx
-
   drawImgFromLocalThenText(meme)
 }
 
@@ -31,17 +30,18 @@ function onReplaceLine() {
 function drawTexts(meme) {
   for (let i = 0; i < meme.lines.length; i++) {
     if (meme.selectedLineIdx === i) {
-      let { txt, posX, posY, size, align, color } = meme.lines[i]
-      drawTextInRect(posX - 70, posY - 25, size, txt, align, color)
+      let { txt, posX, posY, size, align, color, icon } = meme.lines[i]
+      drawTextInRect(posX - 70, posY - 25, size, txt, align, color, icon)
     } else {
-      let { txt, posX, posY, size, color, align } = meme.lines[i]
-      drawText(txt, posX, posY, size, color, align)
+      let { txt, posX, posY, size, color, align, icon } = meme.lines[i]
+      drawText(txt, posX, posY, size, color, align, icon)
     }
   }
 }
 
 function drawText(text, x, y, size, color, align) {
   gCtx.fillStyle = color
+  console.log(color);
   gCtx.font = `${size}px Arial`
   gCtx.textAlign = align
   gCtx.textBaseline = 'middle'
@@ -49,10 +49,9 @@ function drawText(text, x, y, size, color, align) {
   gCtx.fillText(text, x + 45, y + 22)
 }
 
-function drawTextInRect(x, y, size, text, align) {
+function drawTextInRect(x, y, size, text, align,color) {
   let lineHeight = size * 1.286
-  let textWidth =
-    gCtx.measureText(text).width < 225 ? 225 : gCtx.measureText(text).width
+  let textWidth = gCtx.measureText(text).width < 225 ? 225 : gCtx.measureText(text).width
 
   gCtx.fillStyle = 'green'
   gCtx.font = `${size}px Arial`
@@ -60,8 +59,9 @@ function drawTextInRect(x, y, size, text, align) {
   gCtx.textBaseline = 'middle'
   gCtx.strokeStyle = 'yellow'
   gCtx.strokeRect(x, y, textWidth, lineHeight)
-  gCtx.fillStyle = 'orange'
+  gCtx.fillStyle = color
   gCtx.fillText(text, x + 45, y + 22)
+  
 }
 
 function onDrawText(text) {
@@ -173,23 +173,23 @@ function onUploadImg() {
 }
 
 function addIcons (){
-    // elContainer.innerHTML = gIcons
-    
     let strHtml = ``
     let elContainer = document.querySelector('.icon-container')
     let icons = getIcons()
-    // debugger
-  
-    strHtml = icons.map((icon) => `<td onclick="onSelectIcon()">${icon}</td>`)
-  
+    
+    strHtml = icons.map((icon) => `<div class="icon" onclick="onSelectIcon(this)">${icon}</div>`)
     elContainer.innerHTML = strHtml.join(``)
 }
-addIcons()
+
+function onSelectIcon(value) {
+    updateMeme(value)
+    gCtx.fillText(value.innerText,20,  150)
+}
+
+function onColorChange(color) {
+    changeColor(color)
+}
 
 function onNavClicked() {
-    console.log("nav clicked");
-let elContainer =  document.querySelector('.main-header')
-elContainer.style="over-flow:inherit;"
-
-//second clicked swich to over-flow : hidden;
+ 
 }
