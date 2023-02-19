@@ -38,6 +38,10 @@ var gMeme = {
   ],
 }
 
+function getLinesLength() {
+  return gMeme.lines.length
+}
+
 function addLine() {
   gMeme.lines.push({
     txt: 'Enter text',
@@ -56,6 +60,10 @@ function replaceLine() {
   } else if (gMeme.selectedLineIdx === 1) {
     gMeme.selectedLineIdx = 0
   }
+}
+
+function getSelectedLine() {
+  return gMeme.lines[gMeme.selectedLineIdx]
 }
 
 function getMeme() {

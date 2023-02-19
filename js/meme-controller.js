@@ -1,9 +1,10 @@
 'use strict'
 
+const MAX_LENGTH = 18
+
 let gElCanvas
 let gCtx
-
-let isNavOpen = true
+let isNavOpen = false
 
 
 gElCanvas = document.querySelector('#my-canvas')
@@ -21,24 +22,30 @@ function renderCanvas() {
 }
 
 function onAddLIne() {
-  addLine()
-  document.querySelector('.editor-input').value = ''
-  replaceLine()
-  renderCanvas()
+  if(getLinesLength() < 2){
+    addLine()
+    document.querySelector('.editor-input').value = ''
+    replaceLine()
+    renderCanvas()
+  }
 }
 
 function onReplaceLine() {
   replaceLine()
+  let selectedLine = getSelectedLine()
+  document.querySelector('.editor-input').value = selectedLine.txt
+  renderCanvas()
 }
 
 function drawTexts(meme) {
   for (let i = 0; i < meme.lines.length; i++) {
     if (meme.selectedLineIdx === i) {
       let { txt, posX, posY, size, align, color, icon } = meme.lines[i]
+      
       drawTextInRect(posX - 70, posY - 25, size, txt, align, color, icon)
     } else {
       let { txt, posX, posY, size, color, align, icon } = meme.lines[i]
-      drawText(txt, posX, posY, size, color, align, icon)
+      drawText(txt, posX - 70, posY - 25, size, color, align, icon)
     }
   }
 }
@@ -50,7 +57,7 @@ function drawText(text, x, y, size, color, align) {
   gCtx.textAlign = align
   gCtx.textBaseline = 'middle'
   gCtx.strokeStyle = 'yellow'
-  gCtx.fillText(text, x + 45, y + 22)
+  gCtx.fillText(text, x + 1, y + 18)
 }
 
 function drawTextInRect(x, y, size, text, align,color) {
@@ -68,9 +75,14 @@ function drawTextInRect(x, y, size, text, align,color) {
   
 }
 
-function onDrawText(text) {
-  updateText(text)
-  renderCanvas()
+function onDrawText(elInput) {
+  if(MAX_LENGTH > elInput.value.length) {
+    updateText(elInput.value)
+    renderCanvas()
+  } else {
+    let selectedLine = getSelectedLine()
+    elInput.value = selectedLine.txt
+  }
 }
 
 function renderImagesForDisplay() {
@@ -197,16 +209,14 @@ function onColorChange(color) {
 
 function onNavClicked() {
   
-    let elNav = document.querySelector('.main-header')
+    let elNav = document.querySelector('.btn-list')
     
     if(isNavOpen){
-      elNav.style.display='block'
-    //  elNavBar.style.translate='0%'
-    isNavOpen=false
-   }
-   else{
-    // elNavBar.style.translate='100%'
-    elNav.style.display='none'
+      elNav.classList.add('mobile-hidden')
+      isNavOpen=false
+    }
+    else{
+      elNav.classList.remove('mobile-hidden')
     isNavOpen=true
    } 
 }
