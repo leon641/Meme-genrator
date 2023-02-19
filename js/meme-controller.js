@@ -3,11 +3,14 @@
 let gElCanvas
 let gCtx
 
+let isNavOpen = true
+
 
 gElCanvas = document.querySelector('#my-canvas')
 gCtx = gElCanvas.getContext('2d')
 
 function onInit() {
+  onGallery()
   renderCanvas()
   addIcons()
 }
@@ -19,6 +22,7 @@ function renderCanvas() {
 
 function onAddLIne() {
   addLine()
+  document.querySelector('.editor-input').value = ''
   replaceLine()
   renderCanvas()
 }
@@ -51,16 +55,16 @@ function drawText(text, x, y, size, color, align) {
 
 function drawTextInRect(x, y, size, text, align,color) {
   let lineHeight = size * 1.286
-  let textWidth = gCtx.measureText(text).width < 225 ? 225 : gCtx.measureText(text).width
-
+  let textWidth = gCtx.measureText(text).width < 210 ? 210 : gCtx.measureText(text).width
+  gCtx.lineWidth = 3
   gCtx.fillStyle = 'green'
   gCtx.font = `${size}px Arial`
   gCtx.textAlign = align
   gCtx.textBaseline = 'middle'
-  gCtx.strokeStyle = 'yellow'
+  gCtx.strokeStyle = 'black'
   gCtx.strokeRect(x, y, textWidth, lineHeight)
   gCtx.fillStyle = color
-  gCtx.fillText(text, x + 45, y + 22)
+  gCtx.fillText(text, x + 1, y + 18)
   
 }
 
@@ -99,6 +103,7 @@ function drawImgFromLocalThenText(meme) {
 }
 
 function onGallery() {
+
   let imgGallery = document.querySelector('.gallery')
   if (imgGallery.style.display === 'none') {
     document.querySelector('.container').style.display = 'none'
@@ -191,5 +196,18 @@ function onColorChange(color) {
 }
 
 function onNavClicked() {
- 
+  
+    let elNav = document.querySelector('.main-header')
+    
+    if(isNavOpen){
+      elNav.style.display='block'
+    //  elNavBar.style.translate='0%'
+    isNavOpen=false
+   }
+   else{
+    // elNavBar.style.translate='100%'
+    elNav.style.display='none'
+    isNavOpen=true
+   } 
 }
+ 

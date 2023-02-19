@@ -3,23 +3,23 @@
 }
 
 .main-container {
-    margin:  0 auto;
-    width: 70%;
-    height: 500px;
+    margin: 0 auto;
+    width: 60%;
+    height: 460px;
     background-color: rgb(172, 86, 60);
     border-radius: 30px;
 }
 
 .main-header {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap: 5px;
 
     width: 100%;
     height: 60px;
 
-     border-radius: 6px;
+    border-radius: 6px;
     background: rgb(247, 133, 67);
 }
 
@@ -30,9 +30,10 @@
 
 .container {
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-block-start: 30px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
 }
 
 canvas {
@@ -45,13 +46,40 @@ canvas {
 }
 
 .img-gallery {
-    width: 125px;
-    height: 125px;
+    width: 120px;
+    height: 120px;
+    border-radius: 16px;
+    transition: 1s ease;
+}
+
+.img-gallery:hover {
+    cursor: pointer;
+
+    -webkit-transform: scale(1.15);
+    -ms-transform: scale(1.15);
+    transform: scale(1.15);
+    transition: 1s ease;
+
+
 }
 
 .editor-input {
-    margin-left: 96px;
-    margin-top: 10px;
+    width: ;
+    height: 30px;
+    margin-top: 3px;
+    background-color: #f7c4b0;
+    border-radius: 555px;
+    text-align: center;
+}
+
+.down-btn {
+    border-radius: 10px;
+    margin-left: 3px;
+    background-color: #f1b59d
+}
+
+.down-btn:hover {
+    background-color: greenyellow;
 }
 
 .editor-container {
@@ -72,10 +100,6 @@ canvas {
     gap: 12px;
     margin-top: 30px;
     margin: 2% 11%;
-}
-
-.container {
-    position: relative;
 }
 
 .editor-btn {
@@ -129,8 +153,7 @@ canvas {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto;
-    margin-top: 10px;
+    margin: 2px auto;
     border-radius: 8px;
     width: 185px;
     height: 40px;
@@ -146,7 +169,7 @@ canvas {
     display: none;
 }
 
-@media screen and (max-width: 1060px) {
+@media screen and (max-width: 1240px) {
     .main-header {
         position: relative;
         display: block;
@@ -165,38 +188,36 @@ canvas {
         margin-top: 10px;
     }
 
-    .container {
-        display: inline;
-    }
-
     .main-container {
         width: 370px;
         height: auto;
     }
 
     .canvas-container {
-        margin:  5px auto;
+
+        margin: 5px auto;
         margin-left: 2%;
     }
-    
+
     .editor-container {
-        margin:  0 auto;
+
+        margin: 0 auto;
 
     }
 
     .navbar-icon {
-        
+
         margin-inline-start: 315px;
         margin-block-start: -35px;
         z-index: 2;
         top: 1px !important;
         cursor: pointer;
-       
+
     }
 
     .navbar-img {
         display: block;
-    
+
     }
 
 }
@@ -209,12 +230,12 @@ canvas {
 }
 
 .navbar-img {
-    
+
     border-radius: 10px;
 }
 
 .icon-container:hover {
-background-color: rgb(146, 80, 208);
+    background-color: rgb(146, 80, 208);
 }
 
 .icon:hover {
@@ -222,3 +243,6 @@ background-color: rgb(146, 80, 208);
     font-size: 29px;
 }
 
+.about:hover {
+    cursor: not-allowed;
+}

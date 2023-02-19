@@ -30,7 +30,7 @@ var gMeme = {
       txt: 'Enter text',
       size: 25,
       align: 'middle',
-      color: 'yellow',
+      color: 'black',
       posX: 130,
       posY: 50,
       icon: '',
@@ -40,10 +40,10 @@ var gMeme = {
 
 function addLine() {
   gMeme.lines.push({
-    txt: '',
+    txt: 'Enter text',
     size: 25,
     align: 'middle',
-    color: 'red',
+    color: 'black',
     posX: 130,
     posY: 300,
     icon: '',
@@ -115,22 +115,22 @@ function fontDecrease() {
 function alignLeft() {
   let idx = gMeme.selectedLineIdx
   gMeme.lines[idx].align = 'left'
-  gMeme.lines[idx].posX = 20
-  gMeme.lines[idx].posY = 50
+  // gMeme.lines[idx].posX = 20
+  // gMeme.lines[idx].posY = 50
 }
 
 function alignRight() {
   let idx = gMeme.selectedLineIdx
   gMeme.lines[idx].align = 'right'
-  gMeme.lines[idx].posX = 310
-  gMeme.lines[idx].posY = 50
+  // gMeme.lines[idx].posX - 100
+  // gMeme.lines[idx].posY = 50
 }
 
 function alignCenter() {
   let idx = gMeme.selectedLineIdx
   gMeme.lines[idx].align = 'center'
-  gMeme.lines[idx].posX = 160
-  gMeme.lines[idx].posY = 50
+  // gMeme.lines[idx].posX = 160
+  // gMeme.lines[idx].posY = 50
 }
 
 function loadImageFromInput(ev, onImageReady) {

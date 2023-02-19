@@ -7,7 +7,7 @@
     <title>Meme generator</title>
     <link rel="stylesheet" href="css/main.css" />
   </head>
-  <body onload="onInit()">
+  <body class="main-layout" onload="onInit()">
 
 
     <div class="main-container">
@@ -15,43 +15,43 @@
           <img class="logo" src="LOGO/LOGO.png">
           <div class="navbar-icon" onclick="onNavClicked()"><img class="navbar-img" src="img/nav bar icon.png"></div>
 
-        
+             
             <button class="header-btn btn-gallery" onclick="onGallery()">Gallery</button>
-            <button class="header-btn" onclick="onAbout()">About</button>
-            <button class="header-btn"><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
-            <button class="facebook header-btn" onclick="onUploadImg()">Facebook Share</button>
-
-     
+            <button class="header-btn about" onclick="onAbout()">About</button>
+            
+            
         
-
-        
-      </header>
-
-
-      <div class="container">
-        <div class="canvas-container">
+            
+            
+          </header>
+          
+          
+          <div class="container" id="mq">
+            <div class="canvas-container">
             <canvas id="my-canvas" height="350" width="350" style="border: 2px solid black;"></canvas>
         </div>
         
         <section class="editor-container">
           <input oninput="onDrawText(this.value)" class="editor-input" type="text" name="text" placeholder="Enter text here"/>
           <section class="btn-container">
-
-              <button class="editor-btn" onclick="onReplaceLine()"><img class="icon" src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
-              <button class="editor-btn" onclick="onAddLIne()"><img class="icon" src="ICONS/add.png"></button>
-              <button class="editor-btn" onclick="onRemoveLine()"><img class="icon" src="ICONS/trash.png"></button>
+            
+            <button class="editor-btn" onclick="onReplaceLine()"><img class="icon" src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png"></button>
+            <button class="editor-btn" onclick="onAddLIne()"><img class="icon" src="ICONS/add.png"></button>
+            <!-- <button class="editor-btn" onclick="onRemoveLine()"><img class="icon" src="ICONS/trash.png"></button> -->
               
-              <button class="editor-btn" onclick="onFontIncrease()"><img class="icon" src="ICONS/increase font - icon.png"></button>
-              <button class="editor-btn" onclick="onFontDecrease()"><img class="icon" src="ICONS/decrease font - icon.png"></button>
-              <button class="editor-btn" onclick="onTextAlignLeft()"><img class="icon" src="ICONS/align-to-left.png"></button>
-              <button class="editor-btn" onclick="onTextAlignCenter()"><img class="icon" src="ICONS/center-text-alignment.png"></button>
-              <button class="editor-btn" onclick="onTextAlignRight()"><img class="icon" src="ICONS/align-to-right.png"></button>
-              
-              <input class="editor-btn fill-txt" type="color" onchange="onColorChange(this.value)"></>
-              <!-- <button class="editor-btn stroke-txt" type="color" onchange="onColorChange()"><img class="icon" src="ICONS/paint-board-and-brush.png"></button> -->
-              <input class="uploud" type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
-            </section>
-            <div class="icon-container"></div>
+            <button class="editor-btn" onclick="onFontIncrease()"><img class="icon" src="ICONS/increase font - icon.png"></button>
+            <button class="editor-btn" onclick="onFontDecrease()"><img class="icon" src="ICONS/decrease font - icon.png"></button>
+            <button class="editor-btn" onclick="onTextAlignLeft()"><img class="icon" src="ICONS/align-to-left.png"></button>
+            <button class="editor-btn" onclick="onTextAlignCenter()"><img class="icon" src="ICONS/center-text-alignment.png"></button>
+            <button class="editor-btn" onclick="onTextAlignRight()"><img class="icon" src="ICONS/align-to-right.png"></button>
+            
+            <input class="editor-btn fill-txt" type="color" onchange="onColorChange(this.value)"></>
+            <!-- <button class="editor-btn stroke-txt" type="color" onchange="onColorChange()"><img class="icon" src="ICONS/paint-board-and-brush.png"></button> -->
+            <input class="uploud" type="file" class="file-input btn" name="image" onchange="onImgInput(event)" />
+          </section>
+          <div class="icon-container"></div>
+          <button class="down-btn"><a href="#" onclick="downloadCanvas(this)" download="">Download</a></button>
+          <button class="down-btn" onclick="onUploadImg()">Share</button>
         </section>
       </div>
 
